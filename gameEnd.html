@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game End</title>
+</head>
+<body>
+    <h1>You lost!</h1>
+    <button id="btn">Play again!</button><br><br>
+    <button id="menu">Menu</button>
+</body>
+<style>
+    html {
+        font-family: Arial;
+        text-align: center;
+    }
+    h1 {
+        font-size: 30px;
+    }
+
+    #btn, #menu {
+        font-size: 30px;
+    }
+</style>
+<script>
+    const btn = document.getElementById("btn");
+    const menu = document.getElementById("menu");
+    btn.addEventListener("click", function () {
+        window.location.href = "./game.html";
+    });
+
+    menu.addEventListener("click", function () {
+        window.location.href = "./gameMenu.html";
+    })
+</script>
+</html>

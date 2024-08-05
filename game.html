@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+</head>
+<body>
+    <div id="gameWin">
+        <div id="plr"></div>
+        <div id="obs"></div>
+    </div>
+</body>
+<style>
+    #plr {
+        background-color: rgb(0, 102, 255);
+        width: 50px;
+        height: 50px;
+        position: relative;
+        top: 420px;
+        left: 100px;
+    }
+
+    #obs {
+        background-color: rgb(231, 54, 54);
+        width: 50px;
+        height: 50px;
+        position: relative;
+        top: 370px;
+        left: 1000px;
+        animation: run 1.5s ease-in-out infinite;
+    }
+
+    #gameWin {
+        width: 1080px;
+        height: 520px;
+        background-color: rgb(243, 243, 243);
+        border: solid black 1px;
+        border-radius: 1%;
+    }
+
+    @keyframes jump {
+        0%{top: 420px;}
+        30%{top: 320px;}
+        70%{top: 320px;}
+        100%{top: 420px;}
+    }
+
+    @keyframes run {
+        0%{left: 1000px;}
+        100%{left: 0px;}
+    }
+
+    .jump {
+        animation: jump 1s ease-in-out;
+    }
+</style>
+<script>
+    const plr = document.getElementById("plr");
+    const obs = document.getElementById("obs");
+    const win = document.getElementById("gameWin");
+    var speed = 1500;
+    var run = true;
+    function isColliding(element1, element2) {
+        const rect1 = element1.getBoundingClientRect();
+        const rect2 = element2.getBoundingClientRect();
+
+        if (
+            rect1.left <= rect2.right &&
+            rect1.right >= rect2.left &&
+            rect1.top <= rect2.bottom &&
+            rect1.bottom >= rect2.top
+        ) {
+            return true; // collision detected
+        }
+        return false; // no collision
+    }
+
+    document.addEventListener('keypress', (event) => {
+        if (event.key === ' ') {
+            jump();
+        }
+    });
+    function jump() {
+        plr.classList.add("jump");
+        setTimeout(function () {
+            plr.classList.remove("jump");
+        }, 1000);
+    }
+
+    setInterval(() => {
+    if (isColliding(plr, obs)) {
+        window.location.href = "./gameEnd.html";
+    }
+}, 1);
+</script>
+</html>
